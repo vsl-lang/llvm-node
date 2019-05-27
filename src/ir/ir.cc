@@ -6,6 +6,9 @@
 #include "data-layout.h"
 #include "function-type.h"
 #include "ir-builder.h"
+#include "di-builder.h"
+#include "di-file.h"
+#include "di-compile-unit.h"
 #include "module.h"
 #include "llvm-context.h"
 #include "type.h"
@@ -36,6 +39,7 @@
 #include "undef-value.h"
 #include "constant-expr.h"
 #include "integer-type.h"
+#include "constant-expr.h"
 
 NAN_MODULE_INIT(InitIR) {
     AllocaInstWrapper::Init(target);
@@ -60,6 +64,9 @@ NAN_MODULE_INIT(InitIR) {
     FunctionTypeWrapper::Init(target);
     GlobalVariableWrapper::Init(target);
     IRBuilderWrapper::Init(target);
+    DIBuilderWrapper::Init(target);
+    DIFileWrapper::Init(target);
+    DICompileUnitWrapper::Init(target);
     InitLinkageTypes(target);
     IntegerTypeWrapper::Init(target);
     ModuleWrapper::Init(target);
