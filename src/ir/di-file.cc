@@ -6,9 +6,7 @@ NAN_MODULE_INIT(DIFileWrapper::Init) {
     v8::Local<v8::FunctionTemplate> tpl = Nan::New<v8::FunctionTemplate>(New);
     tpl->SetClassName(Nan::New("DIFile").ToLocalChecked());
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
-
-    Nan::SetAccessor(tpl->InstanceTemplate(), Nan::New("filename").ToLocalChecked(), DIFileWrapper::getFilename);
-    Nan::SetAccessor(tpl->InstanceTemplate(), Nan::New("directory").ToLocalChecked(), DIFileWrapper::getDirectory);
+    tpl->Inherit(Nan::New(DIScopeWrapper::functionTemplate));
 
     functionTemplate.Reset(tpl);
 
@@ -34,18 +32,6 @@ NAN_METHOD(DIFileWrapper::New) {
     info.GetReturnValue().Set(info.This());
 }
 
-NAN_GETTER(DIFileWrapper::getFilename) {
-    auto* wrapper = DIFileWrapper::FromValue(info.Holder())->getDIFile();
-    auto result = Nan::New(wrapper->getFilename().str()).ToLocalChecked();
-    info.GetReturnValue().Set(result);
-}
-
-NAN_GETTER(DIFileWrapper::getDirectory) {
-    auto* wrapper = DIFileWrapper::FromValue(info.Holder())->getDIFile();
-    auto result = Nan::New(wrapper->getDirectory().str()).ToLocalChecked();
-    info.GetReturnValue().Set(result);
-}
-
 v8::Local<v8::Object> DIFileWrapper::of(llvm::DIFile *file) {
     v8::Local<v8::FunctionTemplate> localFunctionTemplate = Nan::New(functionTemplate);
     v8::Local<v8::Object> object = Nan::NewInstance(localFunctionTemplate->InstanceTemplate()).ToLocalChecked();
@@ -58,7 +44,7 @@ v8::Local<v8::Object> DIFileWrapper::of(llvm::DIFile *file) {
 }
 
 llvm::DIFile *DIFileWrapper::getDIFile() {
-    return this->diFile;
+    return static_cast<llvm::DIFile*>(getDIScope());
 }
 
 bool DIFileWrapper::isInstance(v8::Local<v8::Value> value) {

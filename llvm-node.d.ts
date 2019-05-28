@@ -268,7 +268,11 @@ declare namespace llvm {
 
   }
 
-  class DIFile {
+  class DIFile extends DIScope {
+    private constructor();
+  }
+
+  class DIScope {
     readonly filename: string;
     readonly directory: string;
 

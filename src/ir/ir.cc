@@ -9,6 +9,7 @@
 #include "di-builder.h"
 #include "di-file.h"
 #include "di-compile-unit.h"
+#include "di-scope.h"
 #include "module.h"
 #include "llvm-context.h"
 #include "type.h"
@@ -60,13 +61,14 @@ NAN_MODULE_INIT(InitIR) {
     ConstantIntWrapper::Init(target);
     ConstantPointerNullWrapper::Init(target);
     DataLayoutWrapper::Init(target);
+    DIBuilderWrapper::Init(target);
+    DICompileUnitWrapper::Init(target);
+    DIScopeWrapper::Init(target);
+    DIFileWrapper::Init(target);
     FunctionWrapper::Init(target);
     FunctionTypeWrapper::Init(target);
     GlobalVariableWrapper::Init(target);
     IRBuilderWrapper::Init(target);
-    DIBuilderWrapper::Init(target);
-    DIFileWrapper::Init(target);
-    DICompileUnitWrapper::Init(target);
     InitLinkageTypes(target);
     IntegerTypeWrapper::Init(target);
     ModuleWrapper::Init(target);
