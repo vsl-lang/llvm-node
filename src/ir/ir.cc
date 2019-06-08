@@ -7,9 +7,12 @@
 #include "function-type.h"
 #include "ir-builder.h"
 #include "di-builder.h"
-#include "di-file.h"
+#include "di-basic-type.h"
+#include "di-subroutine-type.h"
 #include "di-compile-unit.h"
+#include "di-file.h"
 #include "di-scope.h"
+#include "di-type.h"
 #include "module.h"
 #include "llvm-context.h"
 #include "type.h"
@@ -64,6 +67,9 @@ NAN_MODULE_INIT(InitIR) {
     DIBuilderWrapper::Init(target);
     DICompileUnitWrapper::Init(target);
     DIScopeWrapper::Init(target);
+    DITypeWrapper::Init(target);
+    DIBasicTypeWrapper::Init(target);
+    DISubroutineTypeWrapper::Init(target);
     DIFileWrapper::Init(target);
     FunctionWrapper::Init(target);
     FunctionTypeWrapper::Init(target);

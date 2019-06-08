@@ -29,6 +29,7 @@ private:
     // instance
     static NAN_GETTER(getFilename);
     static NAN_GETTER(getDirectory);
+    static NAN_GETTER(getName);
 };
 
 #endif //LLVM_NODE_DI_SCOPE_H

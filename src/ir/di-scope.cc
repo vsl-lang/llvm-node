@@ -9,6 +9,7 @@ NAN_MODULE_INIT(DIScopeWrapper::Init) {
 
     Nan::SetAccessor(tpl->InstanceTemplate(), Nan::New("filename").ToLocalChecked(), DIScopeWrapper::getFilename);
     Nan::SetAccessor(tpl->InstanceTemplate(), Nan::New("directory").ToLocalChecked(), DIScopeWrapper::getDirectory);
+    Nan::SetAccessor(tpl->InstanceTemplate(), Nan::New("name").ToLocalChecked(), DIScopeWrapper::getName);
 
     functionTemplate.Reset(tpl);
 
